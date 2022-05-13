@@ -6,8 +6,10 @@ const Banner = () => {
         <div class="bg-[url('/src/assets//images/bg.png')]">
             <div class="hero min-h-screen">
                 <div class="hero-content flex-col lg:flex-row-reverse w-6/12">
-                    <img src={chair} class="max-w-sm rounded-lg shadow-2xl" alt='' />
-                    <div className='w-6/12'>
+                    <div className='flex-1 mr-0 w-full'>
+                        <img src={chair} class="max-w-sm rounded-lg shadow-2xl" alt='' />
+                    </div>
+                    <div className='w-6/12 ml-0'>
                         <h1 class="text-5xl font-bold">Your New Smile Starts Here</h1>
                         <p class="py-6">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</p>
                         <button class="btn btn-primary uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary">Get Started</button>
