@@ -6,7 +6,7 @@ const InfoCard = ({ infoCard }) => {
 
     return (
         <div className=''>
-            <div class={`card lg:card-side bg-accent shadow-xl text-white pl-5 ${bgClass}`}>
+            <div class={`card lg:card-side bg-accent shadow-xl text-white p-5 ${bgClass}`}>
                 <figure>
                     <img src={img} alt="Album" />
                 </figure>
