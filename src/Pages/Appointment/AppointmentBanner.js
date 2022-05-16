@@ -7,8 +7,8 @@ const AppointmentBanner = ({ date, setDate }) => {
 
     return (
         <div className="bg-[url('/src/assets/images/bg.png')]">
-            <div class="hero min-h-screen">
-                <div class="hero-content flex-col lg:flex-row-reverse">
+            <div className="hero min-h-screen">
+                <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className='flex-1'>
                         <img src={chair} class="rounded-lg w-full shadow-2xl" alt='doctor-chair' />
                     </div>
