@@ -1,7 +1,8 @@
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import { toast } from 'react-toastify';
 
 const BookingModal = ({ date, treatment, setTreatment }) => {
     const { _id, name, slots } = treatment;
@@ -12,8 +13,40 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
         const slot = event.target.slot.value;
         console.log(_id, name, slot);
 
-        // to close the modal
-        setTreatment(null);
+
+        const formatedDate = format(date, 'PP')
+
+        const booking = {
+            treatmentId: _id,
+            treatmentName: name,
+            date: formatedDate,
+            slot,
+            patientName: user.displayName,
+            phone: event.target.phone.value
+
+        }
+        fetch(`http://localhost:5000/booking`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+                if (data.success) {
+                    toast(`Appointment is booked on ${formatedDate} at ${slot}`)
+                } else {
+                    toast.error(`You already have an appointment on ${data.booking?.date} at ${data.booking?.slot}`)
+                }
+                // to close the modal
+                setTreatment(null);
+
+            })
+
+
     }
 
     return (
@@ -30,9 +63,12 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
 
                         <div class="form-control w-full max-w-xs">
 
-                            <select class="select select-bordered">
+                            <select name="slot" class="select select-bordered">
                                 {
-                                    slots.map((slot, index) => <option key={index} value={slot}>{slot}</option>)
+                                    slots.map((slot, index) => <option
+                                        key={index}
+                                        value={slot}
+                                    >{slot}</option>)
                                 }
                             </select>
                         </div>
