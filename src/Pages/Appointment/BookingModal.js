@@ -18,9 +18,10 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
 
         const booking = {
             treatmentId: _id,
-            treatmentName: name,
+            treatment: name,
             date: formatedDate,
             slot,
+            patient: user.email,
             patientName: user.displayName,
             phone: event.target.phone.value
 
