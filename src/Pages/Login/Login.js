@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
@@ -13,21 +13,25 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
-
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-
-    const [token] = useToken(user || gUser)
     const { register, formState: { errors }, handleSubmit } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
 
+    const [token] = useToken(user || gUser)
+
+    let from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [token, from, navigate])
+
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password)
 
-        console.log(data);
     }
-
-    let from = location.state?.from?.pathname || "/";
 
     let loginError;
 
@@ -41,9 +45,6 @@ const Login = () => {
         return <Loading />
     }
 
-    if (token) {
-        navigate(from, { replace: true });
-    }
 
     return (
         <div className='flex h-screen justify-center items-center'>
