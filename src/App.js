@@ -35,7 +35,7 @@ function App() {
         }>
           <Route index element={<MyAppointment />} />
           <Route path="review" element={<MyReview />} />
-          <Route path="users" element={<RequireAdmin><Users /></RequireAdmin>} />
+          <Route path="user" element={<RequireAdmin><Users /></RequireAdmin>} />
 
         </Route>
 
