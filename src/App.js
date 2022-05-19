@@ -5,7 +5,6 @@ import Appointment from "./Pages/Appointment/Appointment";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Login/Register";
-import RequireAuth from "./Pages/RequireAuth/RequireAuth";
 import Navbar from "./Pages/Shared/Navbar";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +12,8 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyAppointment from "./Pages/Dashboard/MyAppointment";
 import MyReview from "./Pages/Dashboard/MyReview";
 import Users from "./Pages/Dashboard/Users";
+import RequireAuth from "./Pages/Login/RequireAuth";
+import RequireAdmin from "./Pages/Login/RequireAdmin";
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
         }>
           <Route index element={<MyAppointment />} />
           <Route path="review" element={<MyReview />} />
-          <Route path="user" element={<Users />} />
+          <Route path="users" element={<RequireAdmin><Users /></RequireAdmin>} />
 
         </Route>
 

@@ -26,7 +26,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
             phone: event.target.phone.value
 
         }
-        fetch(`http://localhost:5000/booking`, {
+        fetch(`https://radiant-tor-66529.herokuapp.com/booking`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
