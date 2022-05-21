@@ -6,7 +6,7 @@ const DeleteConfirmModal = ({ deletingDoctor, setDeletingDoctor, refetch }) => {
     const { name, email } = deletingDoctor;
 
     const handleDelete = () => {
-        const url = `http://localhost:5000/doctor/${email}`;
+        const url = `https://radiant-tor-66529.herokuapp.com/doctor/${email}`;
 
         fetch(url, {
             method: 'delete',

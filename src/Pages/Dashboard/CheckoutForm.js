@@ -13,11 +13,14 @@ const CheckoutForm = ({ appointment }) => {
     const [cardError, setCardError] = useState()
 
     const [clientSecret, setClientSecret] = useState('');
-    const { price } = appointment;
+    const [transactionId, setTransactionId] = useState('');
+    const [processing, setProcessing] = useState(false);
+    const [success, setSuccess] = useState('');
+    const { _id, price, patient, patientName } = appointment;
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/create-payment-intent`, {
+        fetch(`https://radiant-tor-66529.herokuapp.com/create-payment-intent`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -52,9 +55,55 @@ const CheckoutForm = ({ appointment }) => {
             card,
         });
 
-
         setCardError(error?.message || "")
+        setSuccess('');
+        setProcessing(true)
+        // confirm card payment
+        const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: patientName,
+                        email: patient,
+                    },
+                },
+            },
+        );
 
+        if (intentError) {
+            setCardError(intentError?.message);
+            setProcessing(false)
+        } else {
+            setCardError('');
+            console.log(paymentIntent);
+            setTransactionId(paymentIntent.id);
+            setSuccess('Congrats! Your payment is completed')
+
+
+            // store payment on database
+            const payment = {
+                appointment: _id,
+                transactionId: paymentIntent.id
+
+            }
+            fetch(`https://radiant-tor-66529.herokuapp.com/booking/${_id}`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(payment)
+
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setProcessing(false);
+                    console.log(data);
+                })
+
+        }
     }
 
     return (
@@ -82,6 +131,13 @@ const CheckoutForm = ({ appointment }) => {
             </form>
             {
                 cardError && <p className='text-red-500'>{cardError}</p>
+            }
+            {
+                success && <div className='text-green-500'>
+                    <p>{success}</p>
+                    <p>Your transaction id is {transactionId} </p>
+
+                </div>
             }
         </>
     );

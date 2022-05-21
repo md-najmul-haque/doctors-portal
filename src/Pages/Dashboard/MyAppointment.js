@@ -54,7 +54,7 @@ const MyAppointment = () => {
                     </thead>
                     <tbody>
                         {
-                            appointments.map((a, index) => <tr>
+                            appointments.map((a, index) => <tr key={a._id}>
                                 <th>{index + 1}</th>
                                 <td>{a.patientName}</td>
                                 <td>{a.treatment}</td>
@@ -64,7 +64,9 @@ const MyAppointment = () => {
                                     {(a.price && !a.paid && <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-xs btn-success'>Pay Now</button></Link>)}
                                     {(a.price && a.paid) && <div>
                                         <p><span className='text-success'>Paid</span></p>
+                                        <p><small>Transaction Id: <span className='text-success'>{a.transactionId}</span></small></p>
                                     </div>}
+
                                 </td>
                             </tr>
                             )
