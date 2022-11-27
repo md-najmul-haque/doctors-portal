@@ -5,7 +5,7 @@ const UserRow = ({ user, refetch }) => {
     const { email, role } = user
 
     const makeAdmin = () => {
-        fetch(`https://radiant-tor-66529.herokuapp.com/user/admin/${email}`, {
+        fetch(`https://doctors-portal-server-q0mf.onrender.com/user/admin/${email}`, {
             method: 'PUT',
             headers: {
                 authorization: `{bearer ${localStorage.getItem('accessToken')}`

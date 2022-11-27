@@ -12,7 +12,7 @@ const AvailableAppointment = ({ date }) => {
     const formattedDate = format(date, 'PP');
 
 
-    const { data: services, isLoading, refetch } = useQuery(['available', formattedDate], () => fetch(`https://radiant-tor-66529.herokuapp.com/available?date=${formattedDate}`)
+    const { data: services, isLoading, refetch } = useQuery(['available', formattedDate], () => fetch(`https://doctors-portal-server-q0mf.onrender.com/available?date=${formattedDate}`)
         .then(res => res.json())
 
     )
@@ -21,7 +21,7 @@ const AvailableAppointment = ({ date }) => {
         return <Loading></Loading>
     }
     // useEffect(() => {
-    //     fetch(`https://radiant-tor-66529.herokuapp.com/available?date=${formattedDate}`)
+    //     fetch(`https://doctors-portal-server-q0mf.onrender.com/available?date=${formattedDate}`)
     //         .then(res => res.json())
     //         .then(data => setServices(data));
     // }, [formattedDate])

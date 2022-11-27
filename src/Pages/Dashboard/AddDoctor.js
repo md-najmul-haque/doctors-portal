@@ -8,7 +8,7 @@ const AddDoctor = () => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const { data: services, isLoading } = useQuery('services', () => fetch(`https://radiant-tor-66529.herokuapp.com/services`).then(res => res.json()))
+    const { data: services, isLoading } = useQuery('services', () => fetch(`https://doctors-portal-server-q0mf.onrender.com/services`).then(res => res.json()))
 
     const imageStorageKey = 'd90f0f7587defd256d8cd2cd85b0500d'
 
@@ -45,7 +45,7 @@ const AddDoctor = () => {
 
                     }
                     // send to data base,
-                    fetch(`https://radiant-tor-66529.herokuapp.com/doctor`, {
+                    fetch(`https://doctors-portal-server-q0mf.onrender.com/doctor`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

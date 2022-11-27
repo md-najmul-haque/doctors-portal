@@ -20,7 +20,7 @@ const CheckoutForm = ({ appointment }) => {
 
 
     useEffect(() => {
-        fetch(`https://radiant-tor-66529.herokuapp.com/create-payment-intent`, {
+        fetch(`https://doctors-portal-server-q0mf.onrender.com/create-payment-intent`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -88,7 +88,7 @@ const CheckoutForm = ({ appointment }) => {
                 transactionId: paymentIntent.id
 
             }
-            fetch(`https://radiant-tor-66529.herokuapp.com/booking/${_id}`, {
+            fetch(`https://doctors-portal-server-q0mf.onrender.com/booking/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',

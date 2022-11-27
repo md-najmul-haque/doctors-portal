@@ -27,7 +27,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
             phone: event.target.phone.value
 
         }
-        fetch(`https://radiant-tor-66529.herokuapp.com/booking`, {
+        fetch(`https://doctors-portal-server-q0mf.onrender.com/booking`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

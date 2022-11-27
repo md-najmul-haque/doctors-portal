@@ -9,7 +9,7 @@ const useToken = user => {
         const currentUser = { email: email };
 
         if (email) {
-            fetch(`https://radiant-tor-66529.herokuapp.com/user/${email}`, {
+            fetch(`https://doctors-portal-server-q0mf.onrender.com/user/${email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

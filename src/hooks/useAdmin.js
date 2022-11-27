@@ -8,7 +8,7 @@ const useAdmin = user => {
         const email = user?.email
         if (email) {
 
-            fetch(`https://radiant-tor-66529.herokuapp.com/admin/${email}`, {
+            fetch(`https://doctors-portal-server-q0mf.onrender.com/admin/${email}`, {
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json',
